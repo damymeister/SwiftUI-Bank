@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Account" representedClassName="Account" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="currency" optional="YES" attributeType="String"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+        <relationship name="toCurrency" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Currency" inverseName="toAccount" inverseEntity="Currency"/>
+        <relationship name="toUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toAccount" inverseEntity="User"/>
+    </entity>
+    <entity name="Currency" representedClassName="Currency" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="toAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="toCurrency" inverseEntity="Account"/>
+        <relationship name="toPairBuy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PairValue" inverseName="buy_curr" inverseEntity="PairValue"/>
+        <relationship name="toPairSell" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PairValue" inverseName="sell_curr" inverseEntity="PairValue"/>
+    </entity>
+    <entity name="PairValue" representedClassName="PairValue" syncable="YES">
+        <attribute name="buying_currency" optional="YES" attributeType="String"/>
+        <attribute name="selling_currency" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="buy_curr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Currency" inverseName="toPairBuy" inverseEntity="Currency"/>
+        <relationship name="sell_curr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Currency" inverseName="toPairSell" inverseEntity="Currency"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <relationship name="toAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="toUser" inverseEntity="Account"/>
+    </entity>
+</model>
